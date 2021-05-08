@@ -8,6 +8,7 @@ import metadata from './reducers/metadataReducer';
 
 import { getLocalSession } from './reducers/helper';
 import * as actionTypes from './actions/actionTypes';
+import imagezoomReducer from './reducers/imagezoomReducer';
 
 const cleanURL = (url) => {
   const regexProtocolHostPort = /https?:\/\/(([A-Za-z0-9-])+(\.?))+[a-z]+(:[0-9]+)?/;
@@ -117,7 +118,8 @@ function initStore(
   const reducer = combineReducers({
     behavior: behavior(connectingText, storage, docViewer, onWidgetEvent),
     messages: messages(storage),
-    metadata: metadata(storage)
+    metadata: metadata(storage),
+    imagezoom: imagezoomReducer(storage)
   });
 
 

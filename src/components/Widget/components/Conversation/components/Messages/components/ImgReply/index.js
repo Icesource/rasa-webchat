@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react';
 import { PROP_TYPES } from 'constants';
+import { showImgZoom,closeImgZoom } from 'actions';
 
 import './styles.scss';
+import { connect } from 'react-redux';
 
 class ImgReply extends PureComponent {
   render() {
@@ -30,7 +32,7 @@ class ImgReply extends PureComponent {
           { title }
         </b>
         <div className="rw-image-details" style={{ width, height }}>
-          <img className="rw-image-frame" src={image} />
+          <img onClick={()=>this.props.showImgZoom(image)} className="rw-image-frame" src={image} />
         </div>
       </div>
     );
@@ -45,4 +47,14 @@ ImgReply.defaultProps = {
   params: {}
 };
 
-export default ImgReply;
+const mapStateToProps = state => ({
+  imgUrl: state.imagezoom.get('imgUrl'),
+  imgShow: state.imagezoom.get('imgShow'),
+});
+
+const mapDispatchToProps = dispatch => ({
+  showImgZoom: (imgUrl) => dispatch(showImgZoom(imgUrl)),
+  closeImgZoom: () => dispatch(closeImgZoom())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ImgReply);

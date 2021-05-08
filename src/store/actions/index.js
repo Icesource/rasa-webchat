@@ -253,3 +253,15 @@ export function setCustomCss(customCss) {
   };
 }
 
+export function showImgZoom(imgUrl){
+  return {
+    type: actions.IMG_SHOW,
+    imgUrl
+  }
+}
+
+export function closeImgZoom(){
+  return {
+    type: actions.IMG_CLOSE
+  }
+}

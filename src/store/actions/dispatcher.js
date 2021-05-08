@@ -101,6 +101,17 @@ export function newUnreadMessage() {
   store.dispatch(actions.newUnreadMessage());
 }
 
+export function showImgZoom(imgUrl){
+  console.log('dispatch')
+  console.log(imgUrl)
+  store.dispatch(actions.showImgZoom(imgUrl));
+}
+
+export function closeImgZoom(){
+  store.dispatch(actions.closeImgZoom())
+}
+
+
 export function send(playload, text = '', customStore) {
   if (customStore) {
     customStore.dispatch(actions.emitUserMessage(playload));

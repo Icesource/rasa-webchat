@@ -5,9 +5,20 @@ import Header from './components/Header';
 import Messages from './components/Messages';
 import Sender from './components/Sender';
 import './style.scss';
+import { showImgZoom,closeImgZoom } from 'actions';
+import { connect } from 'react-redux';
 
 const Conversation = props =>
-  <div className="rw-conversation-container">
+  <div className="rw-conversation-container"  onClick={()=>console.log(props.imgUrl)}>
+    {props.imgShow &&
+      <div>
+          <div style={{top:'50%',position:'absolute',transform:'translate(0, -50%)', borderRadius:'50%', zIndex:999999}}>
+              <img style={{'width': '100%'}} src='https://i.imgur.com/nGF1K8f.jpg' />
+          </div>
+          <div className='rw-img-show' onClick={props.closeImgZoom}/>
+      </div>
+    }
+
     <Header
       title={props.title}
       subtitle={props.subtitle}
@@ -32,6 +43,7 @@ const Conversation = props =>
       disabledInput={props.disabledInput}
       inputTextFieldHint={props.inputTextFieldHint}
     />
+
   </div>;
 
 Conversation.propTypes = {
@@ -54,4 +66,14 @@ Conversation.propTypes = {
   showMessageDate: PropTypes.oneOfType([PropTypes.bool, PropTypes.func])
 };
 
-export default Conversation;
+const mapStateToProps = state => ({
+    imgUrl: state.imagezoom.get('imgUrl'),
+    imgShow: state.imagezoom.get('imgShow'),
+});
+
+const mapDispatchToProps = dispatch => ({
+    showImgZoom: () => dispatch(showImgZoom()),
+    closeImgZoom: () => dispatch(closeImgZoom())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Conversation);
