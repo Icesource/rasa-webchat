@@ -102,8 +102,6 @@ export function newUnreadMessage() {
 }
 
 export function showImgZoom(imgUrl){
-  console.log('dispatch')
-  console.log(imgUrl)
   store.dispatch(actions.showImgZoom(imgUrl));
 }
 

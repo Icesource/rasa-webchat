@@ -7,13 +7,18 @@ import Sender from './components/Sender';
 import './style.scss';
 import { showImgZoom,closeImgZoom } from 'actions';
 import { connect } from 'react-redux';
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 const Conversation = props =>
   <div className="rw-conversation-container"  onClick={()=>console.log(props.imgUrl)}>
     {props.imgShow &&
       <div>
           <div style={{top:'50%',position:'absolute',transform:'translate(0, -50%)', borderRadius:'50%', zIndex:999999}}>
-              <img style={{'width': '100%'}} src='https://i.imgur.com/nGF1K8f.jpg' />
+              <TransformWrapper>
+                  <TransformComponent>
+                    <img style={{'width': '100%'}} src={props.imgUrl} />
+                  </TransformComponent>
+              </TransformWrapper>
           </div>
           <div className='rw-img-show' onClick={props.closeImgZoom}/>
       </div>

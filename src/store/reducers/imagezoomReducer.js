@@ -21,9 +21,7 @@ export default function (storage) {
                 return Map({
                     ...state,
                     imgShow: false,
-                    // imgUrl: ''
                 })
-                // return state.set('imgShow', false);
             }
             default:
                 return state;
